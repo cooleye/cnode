@@ -33,6 +33,7 @@ export default {
   },
   mounted: function(){
     var tab = this.$route.query.tab;
+    console.log(tab)
     this.$store.dispatch('getTopics',{
       page: 1,
       tab: tab,
@@ -40,6 +41,7 @@ export default {
       mdrender: false
     })
     .then((res) => {
+      console.log(res)
       if(res.data.success == true){
         this.lists = res.data.data;
       }
@@ -66,6 +68,7 @@ export default {
       }
   },
   beforeRouteUpdate (to, from, next) {
+
 
     this.$store.dispatch('getTopics',{
       page: 1,

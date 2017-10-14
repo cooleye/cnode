@@ -40,7 +40,7 @@ export default {
     var id = this.$route.query.id;
     this.$store.dispatch('getTheTopic',id)
     .then((res) => {
-      console.log(res.data.data)
+      // console.log(res.data.data)
       this.data = res.data.data;
     })
   }
