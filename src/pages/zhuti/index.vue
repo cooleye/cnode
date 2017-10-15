@@ -7,10 +7,10 @@
     </div>
     <div class="content">
       <h1 font-size="16px">{{data.title}}</h1>
-      <hr>
+
       <div v-html="data.content"  class="cover">
       </div>
-      <hr>
+
       <div class="replies">
         <div class="rep-header">
             评论
@@ -26,6 +26,17 @@
       </div>
 
     </div>
+
+    <div class="loading-page" v-if="loading">
+      <div class="loading">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -33,21 +44,26 @@
 export default {
   data: function(){
     return{
-      data: []
+      data: [],
+      loading: false
     }
   },
   mounted: function(){
     var id = this.$route.query.id;
+    this.loading = true;
     this.$store.dispatch('getTheTopic',id)
     .then((res) => {
       // console.log(res.data.data)
       this.data = res.data.data;
+      this.loading = false;
     })
   }
 }
 </script>
 
 <style lang="css" scoped="">
+@import "/static/animation.css";
+
 .container{
   width: 100%;height: 100%;
 }
@@ -80,5 +96,14 @@ export default {
 .cover{
   width: 100%;
 }
-
+.loading-page{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: absolute;
+  top: 47px;
+  left: 0;
+  z-index: 999;
+  background-color: #fff;
+}
 </style>
