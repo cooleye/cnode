@@ -21,7 +21,10 @@
                           <p>{{item.create_at | date}}</p>
                         </div>
                     </div>
-                    <h1 class="item-title">{{item.title}}</h1>
+                    <h1 class="item-title">
+                      <span v-if="item.top" class="top">置顶</span>
+                      <span v-if="item.tab && !item.top" class="top">{{ item.tab | tab }}</span>
+                      {{item.title}}</h1>
                     <div class="item-bottom" style="font-size:12px;">
                         <div class="post-views">
                             <i class="iconfont icon-eye"> {{ item.visit_count}}</i>
@@ -35,8 +38,6 @@
                     </div>
 
 
-                    <!-- <p v-if="item.top" class="top">置顶</p>
-                    <p v-if="item.tab && !item.top" class="top">{{ item.tab | tab }}</p> -->
 
 
                   </div>
@@ -244,9 +245,11 @@ ul li{
 }
 .top{
   width: 50px;height: 20px;
-  font-size: 18px;
-  background-color: #aaf;
-  color: #fff;
+  font-size: 15px;
+  border: solid 1px #38f;
+  border-radius: 3px;
+  color: #38f;
+  padding:0 2px;
 }
 .loginname{
   font-size: 14px;

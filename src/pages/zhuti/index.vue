@@ -5,21 +5,40 @@
       <router-link to="/?tab=all"><i class="icon iconfont icon-LC_icon_left_line">返回</i></router-link>
       <h1 class="title">主题</h1>
     </div>
-    <div class="content">
-      <h1 font-size="16px">{{data.title}}</h1>
+    <div class="content" v-if="!loading">
+      <div class="louzhu">
+          <div>
+            <img  class="avatar" :src="data.author.avatar_url ? '':data.author.avatar_url" alt="">
+          </div>
+          <div class="author-loginname">
+            <p>{{data.author.loginname }}</p>
+            <p>{{data.create_at}}</p>
+          </div>
+      </div>
+
+      <div class="blog-title">
+        <h1 font-size="16px">{{data.title}}</h1>
+      </div>
 
       <div v-html="data.content"  class="cover">
       </div>
 
       <div class="replies">
         <div class="rep-header">
-            评论
+            共{{ data.reply_count}}条回复
         </div>
           <ul>
             <li v-for="rep in data.replies">
-              <img class="avatar" :src="rep.author.avatar_url" alt="">
-              <span>{{rep.author.loginname}}</span>
-              <p>{{rep.create_at}}</p>
+              <div class="louzhu" style="border:none;">
+                <div>
+                  <img  class="avatar" :src="rep.author.avatar_url" alt="">
+                </div>
+                <div class="author-loginname">
+                  <p>{{rep.author.loginname }}</p>
+                  <p style="color:#5af;float:right">{{rep.create_at}}</p>
+                </div>
+              </div>
+
               <div class="reply-content" v-html="rep.content"></div>
             </li>
           </ul>
@@ -48,14 +67,16 @@ export default {
       loading: false
     }
   },
-  mounted: function(){
+  created: function(){
     var id = this.$route.query.id;
     this.loading = true;
     this.$store.dispatch('getTheTopic',id)
     .then((res) => {
-      // console.log(res.data.data)
-      this.data = res.data.data;
-      this.loading = false;
+      // console.log(res)
+      if(res.statusText == 'OK'){
+        this.data = res.data.data;
+        this.loading = false;
+      }
     })
   }
 }
@@ -105,5 +126,44 @@ export default {
   left: 0;
   z-index: 999;
   background-color: #fff;
+}
+.louzhu{
+  text-align: left;
+  padding: 10px;
+  height: 30px;
+  line-height: 30px;
+  border-bottom: solid 1px #eee;
+}
+.louzhu div{
+  float: left;
+}
+
+.louzhu .author-loginname{
+  margin-left: 10px;
+}
+.louzhu .author-loginname p{
+  height: 15px;
+  line-height: 15px;
+}
+
+.louzhu .avatar{
+  width: 30px;
+  height: 30px;
+  border: solid 1px #aaa;
+  border-radius: 50%;
+}
+.blog-title{
+  font-size: 16px;
+  font-weight: 800;
+  /*text-align: center;*/
+  padding: 10px;
+  text-align: left;
+}
+.rep-header{
+  border-left: solid 3px #3af;
+  border-bottom: solid 1px #eee;
+  border-top: solid 1px #eee;
+  padding-top: 10px;
+  padding:10px;
 }
 </style>
