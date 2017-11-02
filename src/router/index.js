@@ -8,6 +8,8 @@ import Message from '@/pages/message'
 import Mine from '@/pages/mine'
 import Zhuti from '@/pages/zhuti'
 
+import Login from '@/pages/login'
+
 Vue.use(Router)
 
 var router = new Router({
@@ -43,6 +45,11 @@ var router = new Router({
       path:'/zhuti',
       name:'zhuti',
       component: Zhuti
+    },
+    {
+      path:'/login',
+      name:'login',
+      component: Login
     }
   ],
   linkActiveClass:'active',

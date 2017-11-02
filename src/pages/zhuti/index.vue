@@ -8,7 +8,7 @@
     <div class="content" v-if="!loading">
       <div class="louzhu">
           <div>
-            <img  class="avatar" :src="data.author.avatar_url ? '':data.author.avatar_url" alt="">
+            <img  class="avatar" :src="data.author.avatar_url" alt="">
           </div>
           <div class="author-loginname">
             <p>{{data.author.loginname }}</p>

@@ -14,7 +14,7 @@
                   <div class="item">
                     <div class="item-top">
                         <div class="item-top-left">
-                          <img class="avatar" :src="item.author.avatar_url" alt="">
+                          <!-- <img class="avatar" :src="item.author.avatar_url? '../assets/logo.png' : item.author.avatar_url" alt=""> -->
                         </div>
                         <div class="item-top-right">
                           <p class="loginname">{{item.author.loginname}}</p>
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <h1 class="item-title">
-                      <span v-if="item.top" class="top">置顶</span>
+                      <span v-if="item.top" class="top" style="border-color:red;color:red;">置顶</span>
                       <span v-if="item.tab && !item.top" class="top">{{ item.tab | tab }}</span>
                       {{item.title}}</h1>
                     <div class="item-bottom" style="font-size:12px;">
@@ -240,7 +240,7 @@ ul li{
 .avatar{
   width: 35px;
   height: 35px;
-  border: solid 1px #aaa;
+  border: solid 1px #ddd;
   border-radius: 50%;
 }
 .top{
