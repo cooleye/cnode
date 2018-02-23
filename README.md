@@ -51,21 +51,21 @@
      文件顶部引入了`import Index from '@/pages/index'`  
   2. 在 pages/index里找到 index.vue,可以看到 <div class="footer">，这个就是底部菜单了。这里我们使用
     
-    
+    ```
     <router-link to="/?tab=all"" >
       <i class="icon iconfont icon-all"></i>
       <div  class="icon-name ease">
         首页
       </div>
     </router-link>
-    
+    ```
 
     来实现页面的跳转,默认情况下，我们会显示所有的数据，也就是显示第一个标签页，设置默认路由
-    router.push({path:'/?tab=all'})
+    `router.push({path:'/?tab=all'})`
     跳转到了path 为"/"的路由，参数为tab=all。
   3. 然后我们打开 pages/index 下的tab.vue,在 mounted 生命周期函数中，获取路由传参var `tab = this.$route.query.tab;`
     调用接口获取数据。
-    
+    ```
     this.$store.dispatch('getTopics',{
       page: 1,
       tab: tab,
@@ -79,10 +79,10 @@
         this.loading = false;
       }
     })
-    
+    ```
     这里我们使用了 vuex，把接口的调用放到了store中， 在组件加载成功后， dispatch一个action "getTopics",那么就会
     执行store中
-    
+    ```
      getTopics({ commit },params){
       return axios.get('https://cnodejs.org/api/v1/topics',{
         params:{
@@ -93,7 +93,7 @@
         }
       })
     }
-    
+    ```
     
     这个函数，在这里使用axios进行get请求，传入需要的参数，因为这里是异步请求，所以return 出请求的结果，在上面 dispatch
     后获取请求得到的数据，`this.lists = res.data.data;` 然后在页面 就可以对请求到的数据进行显示了`<li v-for="item in lists">`
@@ -111,7 +111,7 @@
       }
     })
     ```
-    5. 发表文章也是类似，点击发表按钮   <mheader title="发表" showicon="true" @click="publish"/>，执行publish函数
+    5. 发表文章也是类似，点击发表按钮`<mheader title="发表" showicon="true" @click="publish"/>`，执行publish函数
     ```
     publish() {
       var title = this.title;
