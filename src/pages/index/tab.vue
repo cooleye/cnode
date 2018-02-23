@@ -67,7 +67,7 @@ export default {
   },
   mounted: function(){
     var tab = this.$route.query.tab;
-    console.log(tab)
+    console.log('tab:',tab)
     this.loading = true;
     this.$store.dispatch('getTopics',{
       page: 1,
@@ -93,7 +93,7 @@ export default {
               return '分享'
               break;
             case 'good':
-              return '置顶'
+              return '精华'
               break;
             case 'job':
               return '招聘'
@@ -140,6 +140,7 @@ export default {
 
     this.loading = true;
     next();
+    console.log('tab:',to.query.tab)
     this.$store.dispatch('getTopics',{
       page: 1,
       tab: to.query.tab,
@@ -161,7 +162,7 @@ export default {
       this.lists = data
     },
     routeTo(path){
-      this.$route.push(path)
+//    this.$route.push(path)
     }
   }
 }
